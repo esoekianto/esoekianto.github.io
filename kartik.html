@@ -17,6 +17,16 @@
         top: 10px;
         right: 10px;
       }
+      #infographics1 {
+        position: absolute;
+        bottom: 10px;
+        right: 10px;
+      }
+      #infographics2 {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+      }
       #progressbar{
         position: absolute;
         bottom: 10px;
@@ -36,7 +46,7 @@
         //all requests to geoenrich.arcgis.com will proxy to the proxyUrl defined in this object.
         //urlUtils.addProxyRule({
         //  urlPrefix: "geoenrich.arcgis.com",  
-        //  proxyUrl: "http://developers.arcgis.com/sproxy/"
+        //  proxyUrl: "/sproxy/"
         //});  
 
         var map = new Map("map", {
@@ -51,6 +61,18 @@
           returnGeometry: true
         }, "infographics");
         
+        var infographics1 = new Infographic({
+          type: "OneVar",
+          variables: ["food.X1109_X.*"],
+          returnGeometry: true
+        }, "infographics1");
+        
+        var infographics2 = new Infographic({
+          type: "AgePyramid",
+          variables: ["food.X1109_X.*"],
+          returnGeometry: true
+        }, "infographics2");
+        
         var progressBar = new ProgressBar({
           indeterminate: true
         }, "progressbar");
@@ -59,7 +81,11 @@
           map.graphics.clear();
           map.graphics.add(new Graphic(evt.mapPoint, new SimpleMarkerSymbol()));
           infographics.set("studyArea", new GeometryStudyArea({ geometry: evt.mapPoint }));
+          infographics1.set("studyArea", new GeometryStudyArea({ geometry: evt.mapPoint }));
+          infographics2.set("studyArea", new GeometryStudyArea({ geometry: evt.mapPoint }));
           infographics.startup();
+          infographics1.startup();
+          infographics2.startup();
           progressBar.domNode.style.display = "block";
         });
         
@@ -67,12 +93,24 @@
           map.graphics.add(new Graphic(evt.provider.getGeometry(), new SimpleFillSymbol()));
           progressBar.domNode.style.display = "none";
         });
+        
+        infographics1.on("data-ready", function(evt){
+          map.graphics.add(new Graphic(evt.provider.getGeometry(), new SimpleFillSymbol()));
+          //progressBar.domNode.style.display = "none";
+        });
+        
+        infographics2.on("data-ready", function(evt){
+          map.graphics.add(new Graphic(evt.provider.getGeometry(), new SimpleFillSymbol()));
+          //progressBar.domNode.style.display = "none";
+        });
       });
     </script>
   </head>
   <body class="claro">
     <div id="map"></div>
     <div id="infographics"></div>
+    <div id="infographics1"></div>
+    <div id="infographics2"></div>
     <div id="progressbar"></div>
   </body>
 </html>
