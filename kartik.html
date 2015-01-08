@@ -27,6 +27,16 @@
         top: 100px;
         left: 10px;
       }
+      #infographics3 {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+      }
+      #infographics4 {
+        position: absolute;
+        top: 350px;
+        right: 10px;
+      }
       #progressbar{
         position: absolute;
         bottom: 10px;
@@ -56,8 +66,8 @@
         });
         
         var infographics = new Infographic({
-          type: "RelatedVariables",
-          variables: ["food.X1109_X.*"],
+          type: "OneVar",
+          variables: ["food.X1003_X.*"],
           returnGeometry: true
         }, "infographics");
         
@@ -68,10 +78,22 @@
         }, "infographics1");
         
         var infographics2 = new Infographic({
-          type: "AgePyramid",
-          variables: ["AVGHINC_CY.*"],
+          type: "RelatedVariables",
+          variables: ["education.*"],
           returnGeometry: true
         }, "infographics2");
+        
+        var infographics3 = new Infographic({
+          type: "RelatedVariables",
+          variables: ["HouseholdsByIncome.*"],
+          returnGeometry: true
+        }, "infographics3");
+        
+        var infographics4 = new Infographic({
+          type: "AgePyramid",
+          variables: ["AGE.*"],
+          returnGeometry: true
+        }, "infographics4");
         
         var progressBar = new ProgressBar({
           indeterminate: true
@@ -83,15 +105,19 @@
           infographics.set("studyArea", new GeometryStudyArea({ geometry: evt.mapPoint }));
           infographics1.set("studyArea", new GeometryStudyArea({ geometry: evt.mapPoint }));
           infographics2.set("studyArea", new GeometryStudyArea({ geometry: evt.mapPoint }));
+          infographics3.set("studyArea", new GeometryStudyArea({ geometry: evt.mapPoint }));
+          infographics4.set("studyArea", new GeometryStudyArea({ geometry: evt.mapPoint }));
           infographics.startup();
           infographics1.startup();
           infographics2.startup();
+          infographics3.startup();
+          infographics4.startup();
           progressBar.domNode.style.display = "block";
         });
         
         infographics.on("data-ready", function(evt){
           map.graphics.add(new Graphic(evt.provider.getGeometry(), new SimpleFillSymbol()));
-          progressBar.domNode.style.display = "none";
+          //progressBar.domNode.style.display = "none";
         });
         
         infographics1.on("data-ready", function(evt){
@@ -103,6 +129,17 @@
           map.graphics.add(new Graphic(evt.provider.getGeometry(), new SimpleFillSymbol()));
           //progressBar.domNode.style.display = "none";
         });
+        
+        infographics3.on("data-ready", function(evt){
+          map.graphics.add(new Graphic(evt.provider.getGeometry(), new SimpleFillSymbol()));
+          progressBar.domNode.style.display = "none";
+        });
+        
+        infographics4.on("data-ready", function(evt){
+          map.graphics.add(new Graphic(evt.provider.getGeometry(), new SimpleFillSymbol()));
+          //progressBar.domNode.style.display = "none";
+        });
+        
       });
     </script>
   </head>
@@ -111,6 +148,8 @@
     <div id="infographics"></div>
     <div id="infographics1"></div>
     <div id="infographics2"></div>
+    <div id="infographics3"></div>
+    <div id="infographics4"></div>
     <div id="progressbar"></div>
   </body>
 </html>
