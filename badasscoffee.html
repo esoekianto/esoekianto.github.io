@@ -42,9 +42,10 @@
           for (var i = 0; i < items.length; i++) {
             items[i].isVisible = false; //make all default infographics invisible
           }
+          var item0 = new InfographicsOptions.Item("OneVar", ["shopping.MP08006a_B.*"]);
           var item1 = new InfographicsOptions.Item("OneVar", ["Wealth.PCI_CY"]);
           var item2 = new InfographicsOptions.Item("AgePyramid", ["Age.*"]);
-          items.push(item1, item2); //add two new items to the infographicsCarousel
+          items.push(item0, item1, item2); //add two new items to the infographicsCarousel
           infographicsCarousel.set("options", options);
         });
         
