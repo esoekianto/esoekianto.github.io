@@ -68,13 +68,13 @@
         var infographics = new Infographic({
           type: "OneVar",
           variables: ["food.X1109_X.*"],
-          returnGeometry: true
+          returnGeometry: false
         }, "infographics");
         
         var infographics1 = new Infographic({
           type: "OneVar",
           variables: ["food.X1003_X.*"],
-          returnGeometry: true
+          returnGeometry: false
         }, "infographics1");
         
         var infographics2 = new Infographic({
@@ -116,27 +116,27 @@
         });
         
         infographics.on("data-ready", function(evt){
-          map.graphics.add(new Graphic(evt.provider.getGeometry(), new SimpleFillSymbol()));
+          //map.graphics.add(new Graphic(evt.provider.getGeometry(), new SimpleFillSymbol()));
           //progressBar.domNode.style.display = "none";
         });
         
         infographics1.on("data-ready", function(evt){
-          map.graphics.add(new Graphic(evt.provider.getGeometry(), new SimpleFillSymbol()));
+          //map.graphics.add(new Graphic(evt.provider.getGeometry(), new SimpleFillSymbol()));
           //progressBar.domNode.style.display = "none";
         });
         
         infographics2.on("data-ready", function(evt){
-          map.graphics.add(new Graphic(evt.provider.getGeometry(), new SimpleFillSymbol()));
+          //map.graphics.add(new Graphic(evt.provider.getGeometry(), new SimpleFillSymbol()));
           //progressBar.domNode.style.display = "none";
         });
         
         infographics3.on("data-ready", function(evt){
-          map.graphics.add(new Graphic(evt.provider.getGeometry(), new SimpleFillSymbol()));
+          //map.graphics.add(new Graphic(evt.provider.getGeometry(), new SimpleFillSymbol()));
           progressBar.domNode.style.display = "none";
         });
         
         infographics4.on("data-ready", function(evt){
-          map.graphics.add(new Graphic(evt.provider.getGeometry(), new SimpleFillSymbol()));
+          //map.graphics.add(new Graphic(evt.provider.getGeometry(), new SimpleFillSymbol()));
           //progressBar.domNode.style.display = "none";
         });
         
